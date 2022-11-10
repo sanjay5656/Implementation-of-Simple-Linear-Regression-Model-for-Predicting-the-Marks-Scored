@@ -8,57 +8,57 @@ To write a program to predict the marks scored by a student using the simple lin
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1.Use the standard libraries in python for Gradient Design.
-
-2.Set variables for assigning dataset values.
-
-3.Import linear regression from sklearn.
-
-4.Assign the points for representing in the graph.
-
-5.Predict the regression for marks by using the representation of the graph.
-
-6.Compare the graphs and hence we obtained the linear regression for the given datas.
+1.Import the required libraries and read the dataframe.
+2.Assign hours to X and scores to Y.
+3.Implement training set and test set of the dataframe.
+4.Plot the required graph both for test data and training data and Find the values of MSE , MAE and RMSE.
 
 ## Program:
 ```
-Program to implement the simple linear regression model for predicting the marks scored.
+/*Program to implement the simple linear regression model for predicting the marks scored.
 Developed by: Sanjay S
 RegisterNumber: 22007761
+*/
 
-
-import numpy as np
 import pandas as pd
-dataset=pd.read_csv('/content/student_scores.csv')
-
-X=dataset.iloc[:,:-1].values
-Y=dataset.iloc[:,-1].values
-print(X)
-print(Y)
-
+import numpy as np
+import matplotlib.pyplot as plt
+df=pd.read_csv('student_scores.csv')
+#displaying the content in datafile
+df.head()
+df.tail()
+#segregation data to variables
+X=df.iloc[:,:-1].values
+X
+Y=df.iloc[:,1].values
+Y
+#spliting train and test data
 from sklearn.model_selection import train_test_split
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=1/3,random_state=0)
-
 from sklearn.linear_model import LinearRegression
-reg=LinearRegression()
-reg.fit(X_train,Y_train)
+regressor=LinearRegression()
+regressor.fit(X_train,Y_train)
+Y_pred=regressor.predict(X_test)
+#displaying predicted value
+Y_pred
+#displaying actual value
+Y_test
+#graph plot for training data
+plt.scatter(X_train,Y_train,color="orange")
+plt.plot(X_train,regressor.predict(X_train),color="red")
+plt.title("Hours vs Scores(Training Set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
 
-Y_pred=reg.predict(X_test)
-import matplotlib.pyplot as plt
+#graph plot for test data
+plt.scatter(X_test,Y_test,color="purple")
+plt.plot(X_train,regressor.predict(X_train),color="yellow")
+plt.title("Hours vs Scores(Test Set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
 from sklearn.metrics import mean_absolute_error,mean_squared_error
-
-plt.scatter(X_train,Y_train,color='green')
-plt.plot(X_train,reg.predict(X_train),color='red')
-plt.title('training set(h vs s)')
-plt.xlabel('hours')
-plt.ylabel('scores')
-
-plt.scatter(X_test,Y_test,color='red')
-plt.plot(X_test,reg.predict(X_test),color='green')
-plt.title('test set(h vs s)')
-plt.xlabel('hours')
-plt.ylabel('scores')
-
 mse=mean_squared_error(Y_test,Y_pred)
 print('MSC=',mse)
 
@@ -70,10 +70,22 @@ print("RMSE=",rmse)
 ```
 
 ## Output:
-![op1](https://user-images.githubusercontent.com/115128955/198333534-13abeac1-b92c-4b8f-a04e-affaf9ca806f.png)
 
-![op2](https://user-images.githubusercontent.com/115128955/198333845-3bd33f1f-8a36-4fb8-875c-66da9ced1b5b.png)
+![ml2op1](https://user-images.githubusercontent.com/115128955/200998386-d5fbc49a-e91e-46b3-88e0-1c41293b559e.png)
 
+![ml2op2](https://user-images.githubusercontent.com/115128955/200998447-bf5450d5-6e50-4c1f-a50e-e6a83112494e.png)
+
+![ml2op3](https://user-images.githubusercontent.com/115128955/200998469-1f943ff5-7d5d-44b0-973d-b66f38a0593c.png)
+
+![ml2op4](https://user-images.githubusercontent.com/115128955/200998486-2a003a77-67e7-4d4d-917e-a791090f7e9e.png)
+
+![ml2op5](https://user-images.githubusercontent.com/115128955/200998526-9138583e-b94c-447d-862c-eaa611d505ed.png)
+
+![ml2op6](https://user-images.githubusercontent.com/115128955/200998545-13312be6-5900-43fb-bbbb-cd28b81c9faa.png)
+
+![ml2op7](https://user-images.githubusercontent.com/115128955/200998570-8e37d3dd-9565-445b-9e93-8205f51353db.png)
+
+![ml2op8](https://user-images.githubusercontent.com/115128955/200998614-6820432e-e367-48fc-8d84-88f3145f16b3.png)
 
 ## Result:
 Thus the program to implement the simple linear regression model for predicting the marks scored is written and verified using python programming.
